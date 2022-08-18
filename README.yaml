@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: example-github-action-composite
+name: github-action-docker-compose-test-run
 
 # Tags of this project
 tags:
@@ -18,13 +18,13 @@ tags:
 license: "APACHE2"
 
 # Canonical GitHub repo
-github_repo: cloudposse/example-github-action-composite
+github_repo: cloudposse/github-action-docker-compose-test-run
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/example-github-action-composite.svg"
-    url: "https://github.com/cloudposse/example-github-action-composite/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/github-action-docker-compose-test-run.svg"
+    url: "https://github.com/cloudposse/github-action-docker-compose-test-run/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
@@ -32,11 +32,10 @@ badges:
 related: []
 
 # Short description of this project
-description: Template repository of composite GitHub Action
+description: Up docker compose and run tests in specific container
 
 introduction: |-
-  This is template repository to create composite GitHub Actions. 
-  Feel free to use it as reference and starting point.
+    Run tests in enviroment defined with Docker Compose
 
 references:
   - name: "github-actions-workflows"
@@ -49,24 +48,24 @@ references:
 # How to use this project
 usage: |-
   ```yaml
-    name: Pull Request
+    name: Push into Main
     on:
-      pull_request:
-        branches: [ 'main' ]
-        types: [opened, synchronize, reopened, closed, labeled, unlabeled]
+      push:
+        branches: [ master ]
 
     jobs:
-      context:
+      test:
         runs-on: ubuntu-latest
         steps:
-          - name: Example action
-            uses: cloudposse/example-github-action-composite@main
-            id: example
+          - name: Checkout
+            uses: actions/checkout@v3
+    
+          - name: Tests
+            uses: cloudposse/github-action-docker-compose-test-run@main
             with:
-              param1: true
-  
-        outputs:
-          result: ${{ steps.example.outputs.result1 }}
+              file: codefresh/test/docker-compose.yml
+              service: app
+              command: test/unit-tests.sh
   ```
 
 include:
