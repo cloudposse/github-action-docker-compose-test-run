@@ -2,7 +2,7 @@ name: 'Docker compose tests run'
 description: 'Run tests in docker compose environment'
 author: hello@cloudposse.com
 branding:
-  icon: 'file'
+  icon: 'grid'
   color: 'white'
 inputs:
   workdir:
