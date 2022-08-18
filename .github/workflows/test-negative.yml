@@ -29,15 +29,24 @@ jobs:
           service: app
           command: test/test-failure.sh
 
+    outputs:
+      result: ${{ steps.current.conclusion }}
+
+  assert:
+    runs-on: ubuntu-latest
+    needs: [test]
+    continue-on-error: true
+    steps:
+
       - uses: nick-fields/assert-action@v1
         if: ${{ always() }}
         with:
           expected: 'failure'
-          actual: ${{ steps.current.conclusion }}
+          actual: ${{ needs.test.outputs.result }}
 
   teardown:
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [assert]
     if: ${{ always() }}
     steps:
       - name: Tear down
