@@ -24,7 +24,6 @@ jobs:
 
       - uses: ./
         id: current
-        continue-on-error: true
         with:
           file: test/docker-compose.yml
           service: app
