@@ -1,4 +1,4 @@
-name: Test example positive
+name: Tests passed
 on:
 #  # Uncomment when test added first time to register workflow and comment it back after workflow would be registered
 #  #
@@ -24,12 +24,15 @@ jobs:
       - uses: ./
         id: current
         with:
-          param1: 'true'
+          file: test/docker-compose.yml
+          service: app
+          command: test/test-success.sh
 
       - uses: nick-fields/assert-action@v1
+        if: ${{ always() }}
         with:
           expected: 'true'
-          actual: ${{ steps.current.outputs.result1 }}
+          actual: ${{ success() }}
 
   teardown:
     runs-on: ubuntu-latest
