@@ -1,23 +1,44 @@
-name: 'Example composite GitHub action'
-description: 'Example composite GitHub action'
+name: 'Docker compose tests run'
+description: 'Run tests in docker compose environment'
 author: hello@cloudposse.com
 branding:
   icon: 'file'
   color: 'white'
 inputs:
-  param1:
+  workdir:
+    description: 'Working directory'
+    required: false
+    default: './'
+  file:
+    description: 'Docker compose file'
     required: true
-    description: "Input parameter placeholder"
-    default: "true"
-outputs:
-  result1:
-    description: "Output result placeholder"
-    value: ${{ steps.context.outputs.result }}
+  service:
+    description: 'Service run tests inside'
+    required: true
+  entrypoint:
+    description: 'Entrypoint'
+    default: '/bin/sh'
+    required: false
+  command:
+    description: 'Command to run tests'
+    required: true
+outputs: {}
 runs:
   using: "composite"
   steps:
-    - id: context
+    - name: Start stack
+      shell: bash
+      run: docker-compose -f ${{ inputs.file }} up -d
+
+    - name: Test
       shell: bash
       run: |
-          echo "::set-output name=result::${{ inputs.param1 }}"
+        DIR=$(pwd)
+        docker-compose -f ${{ inputs.file }} run -v ${DIR}:/github_workspace -w /github_workspace --entrypoint ${{ inputs.entrypoint }} --rm ${{ inputs.service }} -- ${{ inputs.command }}
+
+    - name: Stop stacks
+      if: always()
+      shell: bash
+      run: docker-compose -f ${{ inputs.file }} down
+
 
