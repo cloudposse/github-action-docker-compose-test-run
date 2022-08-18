@@ -86,7 +86,7 @@ Run tests in enviroment defined with Docker Compose
         - name: Tests
           uses: cloudposse/github-action-docker-compose-test-run@main
           with:
-            file: codefresh/test/docker-compose.yml
+            file: test/docker-compose.yml
             service: app
             command: test/unit-tests.sh
 ```
