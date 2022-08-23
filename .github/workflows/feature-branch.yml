@@ -1,12 +1,12 @@
-name: Pull Request
+name: Feature branch
 on:
   pull_request:
     branches: [ main ]
     types: [opened, synchronize, reopened]
 
 jobs:
-  default:
-    uses: cloudposse/github-actions-workflows/.github/workflows/github-composite-action-pull-request.yml@main
+  perform:
+    uses: cloudposse/github-actions-workflows/.github/workflows/github-composite-action-feature-branch.yml@main
     with:
       organization: "${{ github.event.repository.owner.login }}"
       repository: "${{ github.event.repository.name }}"
