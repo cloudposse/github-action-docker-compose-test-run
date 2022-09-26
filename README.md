@@ -104,6 +104,9 @@ Run tests in enviroment defined with Docker Compose
 | command | Command to run tests | N/A | true |
 | entrypoint | Entrypoint | /bin/sh | false |
 | file | Docker compose file | N/A | true |
+| login | Docker login |  | false |
+| password | Docker password |  | false |
+| registry | Docker registry | N/A | true |
 | service | Service run tests inside | N/A | true |
 | workdir | Working directory | ./ | false |
 
