@@ -22,10 +22,18 @@ inputs:
   command:
     description: 'Command to run tests'
     required: true
+  docker-compose-version:
+    description: 'Docker compose version'
+    required: false
+    default: '1.29.2'
 outputs: {}
 runs:
   using: "composite"
   steps:
+    - uses: KengoTODA/actions-setup-docker-compose@main
+      with:
+        version: ${{ inputs.docker-compose-version }}
+
     - name: Start stack
       shell: bash
       run: docker-compose -f ${{ inputs.file }} up -d
