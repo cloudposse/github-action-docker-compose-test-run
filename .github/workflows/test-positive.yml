@@ -28,6 +28,9 @@ jobs:
           file: test/docker-compose.yml
           service: app
           command: test/test-success.sh
+          registry: registry.hub.docker.com
+          login: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     outputs:
       result: ${{ steps.current.conclusion }}

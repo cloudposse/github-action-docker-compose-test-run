@@ -22,10 +22,37 @@ inputs:
   command:
     description: 'Command to run tests'
     required: true
+  docker-compose-version:
+    description: 'Docker compose version'
+    required: false
+    default: '1.29.2'
+  registry:
+    description: 'Docker registry'
+    required: true
+  login:
+    description: 'Docker login'
+    required: false
+    default: ''
+  password:
+    description: 'Docker password'
+    required: false
+    default: ''
 outputs: {}
 runs:
   using: "composite"
   steps:
+    - uses: KengoTODA/actions-setup-docker-compose@main
+      with:
+        version: ${{ inputs.docker-compose-version }}
+
+    - name: Login
+      uses: docker/login-action@v2
+      if: ${{ contains(inputs.registry, '.amazonaws.com') || ( inputs.login != '' && inputs.password != '' ) }}
+      with:
+        registry: ${{ inputs.registry }}
+        username: ${{ inputs.login }}
+        password: ${{ inputs.password }}
+
     - name: Start stack
       shell: bash
       run: docker-compose -f ${{ inputs.file }} up -d

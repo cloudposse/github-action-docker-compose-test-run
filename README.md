@@ -102,6 +102,7 @@ Run tests in enviroment defined with Docker Compose
 | Name | Description | Default | Required |
 |------|-------------|---------|----------|
 | command | Command to run tests | N/A | true |
+| docker-compose-version | Docker compose version | 1.29.2 | false |
 | entrypoint | Entrypoint | /bin/sh | false |
 | file | Docker compose file | N/A | true |
 | login | Docker login |  | false |
