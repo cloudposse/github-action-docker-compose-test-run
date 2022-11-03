@@ -25,6 +25,7 @@ jobs:
       - uses: ./
         id: current
         with:
+          workdir: ./tests/fixtures/
           file: test/docker-compose.yml
           service: app
           command: test/test-success.sh

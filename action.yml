@@ -55,17 +55,22 @@ runs:
 
     - name: Start stack
       shell: bash
-      run: docker-compose -f ${{ inputs.file }} up -d
+      run: |
+        cd ${{ inputs.workdir }}
+        docker-compose -f ${{ inputs.file }} up -d
 
     - name: Test
       shell: bash
       run: |
+        cd ${{ inputs.workdir }}
         DIR=$(pwd)
         docker-compose -f ${{ inputs.file }} run -v ${DIR}:/github_workspace -w /github_workspace --entrypoint ${{ inputs.entrypoint }} --rm ${{ inputs.service }} -- ${{ inputs.command }}
 
     - name: Stop stacks
       if: always()
       shell: bash
-      run: docker-compose -f ${{ inputs.file }} down
+      run: |
+        cd ${{ inputs.workdir }}
+        docker-compose -f ${{ inputs.file }} down
 
 
