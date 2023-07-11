@@ -57,6 +57,7 @@ runs:
       shell: bash
       run: |
         cd ${{ inputs.workdir }}
+        docker-compose -f ${{ inputs.file }} pull --include-deps
         docker-compose -f ${{ inputs.file }} up -d
 
     - name: Test
