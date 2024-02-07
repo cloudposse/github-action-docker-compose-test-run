@@ -46,7 +46,7 @@ runs:
         version: ${{ inputs.docker-compose-version }}
 
     - name: Login
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       if: ${{ contains(inputs.registry, '.amazonaws.com') || ( inputs.login != '' && inputs.password != '' ) }}
       with:
         registry: ${{ inputs.registry }}
