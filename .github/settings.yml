@@ -1,0 +1,7 @@
+# Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
+_extends: .github
+repository:
+  name: github-action-docker-compose-test-run
+  description: Up docker compose and run tests in specific container
+  homepage: https://cloudposse.com/accelerate
+  topics: ""
