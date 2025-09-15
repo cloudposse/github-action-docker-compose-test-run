@@ -1,20 +1,20 @@
 name: Tests passed
 on:
-  #  # Uncomment when test added first time to register workflow and comment it back after workflow would be registered
-  #  #
-  #  # Added pull_request to register workflow from the PR.
-  #  # Read more https://stackoverflow.com/questions/63362126/github-actions-how-to-run-a-workflow-created-on-a-non-master-branch-from-the-wo
-  #  pull_request: {}
+#  # Uncomment when test added first time to register workflow and comment it back after workflow would be registered
+#  #
+#  # Added pull_request to register workflow from the PR.
+#  # Read more https://stackoverflow.com/questions/63362126/github-actions-how-to-run-a-workflow-created-on-a-non-master-branch-from-the-wo
+#  pull_request: {}
   workflow_dispatch:
     inputs:
       ref:
-        description: The fully-formed ref of the branch or tag that triggered the workflow run
+        description: "The fully-formed ref of the branch or tag that triggered the workflow run"
         required: false
-        type: string
+        type: "string"
       sha:
-        description: The sha of the commit that triggered the workflow run
+        description: "The sha of the commit that triggered the workflow run"
         required: false
-        type: string
+        type: "string"
 jobs:
   setup:
     runs-on: ubuntu-latest

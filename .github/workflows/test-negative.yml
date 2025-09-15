@@ -8,13 +8,13 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: The fully-formed ref of the branch or tag that triggered the workflow run
+        description: "The fully-formed ref of the branch or tag that triggered the workflow run"
         required: false
-        type: string
+        type: "string"
       sha:
-        description: The sha of the commit that triggered the workflow run
+        description: "The sha of the commit that triggered the workflow run"
         required: false
-        type: string
+        type: "string"
 jobs:
   setup:
     runs-on: ubuntu-latest
