@@ -68,8 +68,7 @@ usage: |-
               command: test/unit-tests.sh
   ```
 
-include:
-  - "docs/github-action.md"
+include: []
 
 # Contributors to this project
 contributors:
